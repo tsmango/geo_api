@@ -1,6 +1,6 @@
 A ruby wrapper for GeoAPI with support for:
 * Simple Search
-* Keyword Search (optionally scoped by lat/lon)
+* Keyword Search (either scoped by lat/lon or without entity)
 * MQL Search
 * Parents Methods (both lat/lon and entity)
 * Listing Method
@@ -13,3 +13,27 @@ Set your GeoAPI api key in an initializer:
 
 config/initializers/geo_api.rb
 # GeoAPI.apikey = '----------'
+
+Examples:
+
+# Parents - lat/lon
+> GeoAPI.parents(:lat => 40.8557, :lon => -73.1915)
+
+# Parents - entity
+> GeoAPI.parents(:guid => 'starbucks-coffee-miller-pl-smithtown-ny-11787')
+
+# Listing - entity
+> GeoAPI.listing(:guid => 'starbucks-coffee-miller-pl-smithtown-ny-11787')
+
+# Simple Search
+> GeoAPI.search(:lat => 40.8557, :lon => -73.1915, :radius => '1km')
+
+# Keyword Search - scoped by lat/lon (the lat/lon is first converted to an entity)
+> GeoAPI.search(:lat => 40.8557, :lon => -73.1915, :q => 'Starbucks')
+
+# Keyword Search - standard, without entity
+> GeoAPI.search(:q => 'Starbucks')
+
+# MQL Search
+> entity = [:guid => nil, :type => 'business', 'view.listing' => {'name' => nil, 'address' => nil, 'phone' => nil}]
+> GeoAPI.q(:lat => 40.8557, :lon => -73.1915, :radius => '1km', :entity => entity)
