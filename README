@@ -1,0 +1,15 @@
+A ruby wrapper for GeoAPI with support for:
+* Simple Search
+* Keyword Search (optionally scoped by lat/lon)
+* MQL Search
+* Parents Methods (both lat/lon and entity)
+* Listing Method
+
+Required:
+* rest-client gem (version 1.3.1)
+* A GeoAPI api key
+
+Set your GeoAPI api key in an initializer:
+
+config/initializers/geo_api.rb
+# GeoAPI.apikey = '----------'
